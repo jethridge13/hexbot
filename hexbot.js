@@ -29,7 +29,7 @@ function addColor() {
 
 function addColorResponse(responseJson) {
 	const color = responseJson.colors[0];
-	color.size = NOOPBOT_RANDOM(3, 7);
+	color.size = NOOPBOT_RANDOM(1, 7);
 	colors.push(responseJson.colors[0])
 }
 

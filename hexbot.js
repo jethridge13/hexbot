@@ -9,7 +9,7 @@ function start_app() {
 	sizeCanvas();
 
 	let drawSpeed = 30;
-	let colorSpeed = 2000;
+	let colorSpeed = 200;
 	let ticker = NOOPBOT_TICK_SETUP(draw, drawSpeed);
 	let colorTicker = NOOPBOT_TICK_SETUP(addColor, colorSpeed);
 
@@ -34,10 +34,18 @@ function addColorResponse(responseJson) {
 }
 
 function draw() {
-	colors.forEach(function(point) {
+	colors.forEach((point, index, arr) => {
 		drawPoint(ctx, point);
 		point.coordinates.y = point.coordinates.y + point.size;
+		if (point.coordinates.y > appHeight) {
+			arr.splice(index, 1);
+			return;
+		}
 		point.value = reduceValue(point.value);
+		if (point.value === '#ffffff') {
+			arr.splice(index, 1);
+			return;
+		}
 	});
 }
 

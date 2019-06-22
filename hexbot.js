@@ -76,7 +76,7 @@ function reduceValue(value) {
 function hexToRgb(hex) {
 	const int = parseInt(hex.slice(1), 16);
 	const r = (int >> 16) & 255;
-	const g = (int > 8) & 255;
+	const g = (int >> 8) & 255;
 	const b = int & 255;
 	return [r, g, b];
 }
@@ -84,7 +84,11 @@ function hexToRgb(hex) {
 function rgbToHex(rgb) {
 	let hex = '#';
 	rgb.forEach(value => {
-		hex += (value).toString(16);
+		let newValue = (value).toString(16);
+		if (newValue.length < 2) {
+			newValue = '0' + newValue;
+		}		
+		hex += newValue;
 	});
 	return hex;
 }

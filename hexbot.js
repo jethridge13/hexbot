@@ -38,8 +38,7 @@ function draw() {
 		drawPoint(ctx, point);
 		point.coordinates.y = point.coordinates.y + point.size;
 		if (point.coordinates.y > appHeight) {
-			arr.splice(index, 1);
-			return;
+			point.coordinates.y = 0;
 		}
 		point.value = reduceValue(point.value);
 		if (point.value === '#ffffff') {
